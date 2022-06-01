@@ -34,6 +34,7 @@ public class age_calculato_servlet extends HttpServlet {
         
         
         String number = request.getParameter("age");
+        String message = "";
         
         request.setAttribute("number", number);
                 
@@ -41,20 +42,21 @@ public class age_calculato_servlet extends HttpServlet {
             String errorMessage = "please enter something";
             request.setAttribute("error",errorMessage);
              getServletContext().getRequestDispatcher("/WEB-INF/age-calculator.jsp").forward(request, response);
-             return;
         }
-        
-        else if(number!= null || !number.equals("")){
+        else{
+            
+            try{
         int counter = Integer.parseInt(number);
         int value = counter+1;  
-        String message = "Your next age will be ";
-        request.setAttribute("message", message);
-        request.setAttribute("value", value);
-        getServletContext().getRequestDispatcher("/WEB-INF/age-calculator.jsp").forward(request, response);
-        return;
+        message = "Your next age will be " + value;
+            }
+            catch(NumberFormatException e){
+                message = "please enter the number";
+            }
         }
         
-        
+        request.setAttribute("message",message);
+         getServletContext().getRequestDispatcher("/WEB-INF/age-calculator.jsp").forward(request, response);
         
         
     }

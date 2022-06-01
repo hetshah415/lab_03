@@ -20,13 +20,13 @@
             <input type="text" name="second" value="">
             <br>
             <br>
-             <input type="submit" class="Maths" name="+" value="+" style="height:20px; width: 20px">
-             <input type="submit" class="Maths"  name="-" value="-" style="height:20px; width: 20px">
-             <input type="submit" class="Maths"  name="*" value="*" style="height:20px; width: 20px">
-             <input type="submit" class="Maths"  name="/" value="/" style="height:20px; width: 20px">
+             <input type="submit" class="Maths" name="arithmetic" value="+" style="height:20px; width: 20px">
+             <input type="submit" class="Maths"  name="arithmetic" value="-" style="height:20px; width: 20px">
+             <input type="submit" class="Maths"  name="arithmetic" value="*" style="height:20px; width: 20px">
+             <input type="submit" class="Maths"  name="arithmetic" value="/" style="height:20px; width: 20px">
         </form>
             <p>
-                Result--${Result}${Message}
+                Result--${Result}${message}
             </p>
             
             <a href="age">Age Calculator</a>

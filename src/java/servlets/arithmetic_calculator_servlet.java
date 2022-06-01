@@ -30,50 +30,44 @@ public class arithmetic_calculator_servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int result;
+        int result = 0;
         
         String First = request.getParameter("first");
         String Second = request.getParameter("second");
-        String addition = request.getParameter("+");
-        String subtraction = request.getParameter("-");
-        String multiplication = request.getParameter("*");
-        String division = request.getParameter("/");
+        String input = request.getParameter("arithmetic");
+        String message = "";
+        request.setAttribute("input", input);
         
-        request.setAttribute("Addition", addition);
-        request.setAttribute("Subtraction",subtraction );
-        request.setAttribute("Multiplication", multiplication);
-        request.setAttribute("Division", division);
-        
-        if(First!=null || !First.equals("") ||Second!=null||!Second.equals("") ){
+        if(First==null || First.equals("") ||Second==null||Second.equals("") ){
+                message = "Invalid";
+        }
+        else{
+            try{
                 int firstInteger = Integer.parseInt(First);
                 int secondInteger = Integer.parseInt(Second);
         
-         if(addition.equals("+") || addition.equals("")){
+         if(input.equals("+")){
             result = firstInteger+secondInteger;
-            request.setAttribute("Result",result);
-            getServletContext().getRequestDispatcher("/WEB-INF/Arithmetic_calculator.jsp").forward(request, response);
         }
-         else if(subtraction.equals("-")|| subtraction.equals("")){
+         else if(input.equals("-")){
             result = firstInteger-secondInteger;
-            request.setAttribute("Result",result);
-            getServletContext().getRequestDispatcher("/WEB-INF/Arithmetic_calculator.jsp").forward(request, response);
         }
-         else if(multiplication.equals("*")|| multiplication.equals("") ){
+         else if(input.equals("*")){
             result = firstInteger*secondInteger;
-            request.setAttribute("Result",result);
-            getServletContext().getRequestDispatcher("/WEB-INF/Arithmetic_calculator.jsp").forward(request, response);
         }
-         else if(division.equals("/")|| division.equals("")){
-             if(secondInteger == 0){
-                 String message = "number can not be divided by 0";
-                 request.setAttribute("message",message);
-                }
-            result = firstInteger/secondInteger;
-            request.setAttribute("Result", result);
-            getServletContext().getRequestDispatcher("/WEB-INF/Arithmetic_calculator.jsp").forward(request, response);
+         else if(input.equals("/")){
+            result = firstInteger%secondInteger;
         }
+            }
+            catch(NumberFormatException e){
+                message = "Invalid";
+            }
 
         }
+        request.setAttribute("message",message);
+        request.setAttribute("Result",result);
+        getServletContext().getRequestDispatcher("/WEB-INF/Arithmetic_calculator.jsp").forward(request, response);
+        
         
 
 
